@@ -4,9 +4,30 @@ import Link from "next/link";
 export const metadata = {
   title: "About Us | East Bay Pharmacy",
 };
+type AboutPageData = {
+  heroTitle: string;
+  heroDescription: string;
+  storyTag: string;
+  storyHeading: string;
+  storyPara1: string;
+  storyPara2: string;
+  storyPara3: string;
+  storyImage?: { node?: { sourceUrl: string } };
+  aboutStats?: AboutStat[];
+  aboutValues?: AboutValue[];
+  teamImage?: { node?: { sourceUrl: string } };
+  teamTag: string;
+  teamHeading: string;
+  teamRoles?: TeamRole[];
+  ctaHeading: string;
+  ctaDescription: string;
+  ctaButtonText: string;
+  ctaButtonLink?: { url: string };
+};
+
 
 export default async function AboutPage() {
-  const data = await getAboutPageData();
+ const data: AboutPageData | null = await getAboutPageData();
   if (!data) return null;
 
   return (

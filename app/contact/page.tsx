@@ -4,9 +4,30 @@ import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 export const metadata = {
   title: "Contact | East Bay Pharmacy",
 };
+type ContactPageData = {
+  heroTitle: string;
+  heroDescription: string;
+
+  addressTitle: string;
+  addressLine1: string;
+  addressLine2: string;
+
+  phoneTitle: string;
+  phoneNumber: string;
+  phoneNote: string;
+
+  emailTitle: string;
+  emailAddress: string;
+
+  hoursTitle: string;
+  hoursText: string; // HTML from WP
+
+  mapText: string; // iframe HTML from WP
+};
 
 export default async function ContactPage() {
-  const data = await getContactPageData();
+  const data: ContactPageData | null = await getContactPageData();
+
   if (!data) return null;
 
   return (

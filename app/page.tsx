@@ -1,26 +1,3 @@
-/*import Layout from "@/components/layout/Layout";
-import HeroSection from "@/components/home/HeroSection";
-import ServicesSection from "@/components/home/ServicesSection";
-import AboutSection from "@/components/home/AboutSection";
-import FeaturesSection from "@/components/home/FeaturesSection";
-import TestimonialsSection from "@/components/home/TestimonialsSection";
-import FormsSection from "@/components/home/FormsSection";
-import CTASection from "@/components/home/CTASection";
-
-export default function Home() {
-  return (
-    <Layout>
-      <HeroSection />
-      <ServicesSection />
-      <AboutSection />
-      <FeaturesSection />
-      <TestimonialsSection />
-      <FormsSection />
-      <CTASection />
-    </Layout>
-  );
-}
-*/
 import HeroSection from "@/components/home/HeroSection";
 import AboutSection from "@/components/home/AboutSection";
 import ServicesSection from "@/components/home/ServicesSection";
