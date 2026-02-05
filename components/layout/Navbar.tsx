@@ -4,20 +4,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, Clock, ChevronDown } from "lucide-react";
-
-interface MenuItem {
-  id: string;
-  label: string;
-  path: string;
-  childItems?: {
-    nodes: MenuItem[];
-  };
-}
-
+import { HeaderData } from "@/types/global";
+import { MenuItem } from "@/types/menu";
 interface NavbarProps {
-  headerData: any;
+  headerData: HeaderData;
   menu: MenuItem[];
 }
+
+
+const getChildren = (item?: MenuItem) => item?.childItems?.nodes ?? [];
 
 export default function Navbar({ headerData, menu }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -87,13 +82,13 @@ export default function Navbar({ headerData, menu }: NavbarProps) {
                 }`}
               >
                 {item.label}
-                {item.childItems?.nodes.length > 0 && (
+                {getChildren(item).length > 0 && (
                   <ChevronDown className="w-4 h-4" />
                 )}
               </Link>
 
               {/* Level 2 */}
-              {item.childItems?.nodes.length > 0 && (
+              {getChildren(item).length > 0 && (
                 <div className="
                   absolute left-0 top-full mt-2 
                   bg-card rounded-xl shadow-elevated border border-border/50 
@@ -103,7 +98,7 @@ export default function Navbar({ headerData, menu }: NavbarProps) {
                   transition-all duration-200
                 ">
 
-                  {item.childItems.nodes.map(child => (
+                  {getChildren(item).map(child => (
                     <div key={child.id} className="relative group/sub">
 
                       <Link
@@ -111,13 +106,13 @@ export default function Navbar({ headerData, menu }: NavbarProps) {
                         className="block px-4 py-3 text-sm font-medium hover:text-accent hover:bg-accent/5 transition-all flex justify-between items-center"
                       >
                         {child.label}
-                        {child.childItems?.nodes.length > 0 && (
+                        {getChildren(child).length > 0 && (
                           <ChevronDown className="w-4 h-4 rotate-[-90deg]" />
                         )}
                       </Link>
 
                       {/* Level 3 */}
-                      {child.childItems?.nodes.length > 0 && (
+                      {getChildren(child).length > 0 && (
                         <div className="
                           absolute top-0 left-full
                           bg-card rounded-xl shadow-elevated border border-border/50 
@@ -126,7 +121,7 @@ export default function Navbar({ headerData, menu }: NavbarProps) {
                           group-hover/sub:opacity-100 group-hover/sub:visible group-hover/sub:pointer-events-auto
                           transition-all duration-200
                         ">
-                          {child.childItems.nodes.map(third => (
+                          {getChildren(child).map(third => (
                             <Link
                               key={third.id}
                               href={third.path}
@@ -187,7 +182,8 @@ export default function Navbar({ headerData, menu }: NavbarProps) {
                     {item.label}
                   </Link>
 
-                  {item.childItems?.nodes.map(child => (
+                  {item.childItems?.nodes?.map((child: MenuItem) => (
+
                     <div key={child.id}>
                       <Link
                         href={child.path}
@@ -197,7 +193,8 @@ export default function Navbar({ headerData, menu }: NavbarProps) {
                         {child.label}
                       </Link>
 
-                      {child.childItems?.nodes.map(third => (
+                      {child.childItems?.nodes?.map((third: MenuItem) => (
+
                         <Link
                           key={third.id}
                           href={third.path}

@@ -1,4 +1,45 @@
-export async function getAboutPageData() {
+export type AboutStat = {
+  value: string;
+  label: string;
+};
+
+export type AboutValue = {
+  title: string;
+  description: string;
+};
+
+export type TeamRole = {
+  name: string;
+  description: string;
+};
+
+export type AboutPageData = {
+  heroTitle: string;
+  heroDescription: string;
+
+  storyTag: string;
+  storyHeading: string;
+  storyPara1: string;
+  storyPara2: string;
+  storyPara3: string;
+  storyImage?: { node?: { sourceUrl: string } };
+
+  aboutStats?: AboutStat[];
+  aboutValues?: AboutValue[];
+
+  teamTag: string;
+  teamHeading: string;
+  teamImage?: { node?: { sourceUrl: string } };
+
+  teamRoles?: TeamRole[];
+
+  ctaHeading: string;
+  ctaDescription: string;
+  ctaButtonText: string;
+  ctaButtonLink?: { url: string };
+};
+
+export async function getAboutPageData(): Promise<AboutPageData | null> {
   const res = await fetch(process.env.NEXT_PUBLIC_WP_GRAPHQL_URL!, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
