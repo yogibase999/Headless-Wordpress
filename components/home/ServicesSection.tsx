@@ -66,7 +66,8 @@ export default function ServicesSection({
         <div className="grid md:grid-cols-3 gap-8">
           {data.servicesList.map((service, index) => {
            const iconName = service.icon || "Building2";
-  const Icon = (Icons as Record<string, LucideIcon>)[iconName] || Building2;
+const Icon = (Icons as any)[iconName] || Building2;
+
             return (
               <motion.div
                 key={index}
